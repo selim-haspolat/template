@@ -9,7 +9,7 @@ router.get("/", verifyAdmin, async (req, res, next) => {
   try {
     const users = await User.find();
 
-    res.json({
+    return res.json({
       success: true,
       data: users,
     });

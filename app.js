@@ -19,6 +19,18 @@ app.use(cookieParser());
 app.use("/api/users", userRouter);
 app.use('/api/auth', authRouter);
 
+// Error Handler
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || "Server error";
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    msg: errorMessage,
+  });
+});
+
+
 const connect = async () => {
   try {
     await mongoose.connect(process.env.MONGO);
