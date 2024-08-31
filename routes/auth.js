@@ -32,6 +32,7 @@ router.post("/register", async (req, res, next) => {
     await newUser.save();
     const { password: userPassword, isAdmin, ...otherDetail } = newUser._doc;
 
+    //newUser._id.toString() is the same as newUser._id
     const token = jwt.sign(
       { id: newUser._id, isAdmin: newUser.isAdmin },
       process.env.JWT
